@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Staffly — a clean employee management system for HR teams and employees." />
+    <meta name="theme-color" content="#0d2623" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script>
+      // Apply the saved (or OS) colour mode before first paint to avoid a light-mode flash.
+      try {
+        var saved = JSON.parse(localStorage.getItem('ems.theme'));
+        var dark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (dark) document.documentElement.classList.add('dark');
+      } catch (e) {}
+    </script>
+    <title>Staffly · Employee Management</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>Staffly needs JavaScript to run. Please enable it in your browser.</noscript>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

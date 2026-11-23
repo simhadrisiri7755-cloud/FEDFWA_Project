@@ -1,0 +1,422 @@
+@import "tailwindcss";
+@import "@fontsource-variable/plus-jakarta-sans";
+
+/* ---------------------------------------------------------------------------
+   Design tokens (CO-2: CSS custom properties, selectors, responsive design)
+   Every colour in the UI comes from a token below. The `.dark` class on <html>
+   swaps the whole palette, so components never hard-code colours.
+   --------------------------------------------------------------------------- */
+:root {
+  --surface: #f2f6f4;
+  --surface-2: #e8efec;
+  --card: #ffffff;
+  --line: #e0e8e5;
+  --line-strong: #c3cfcb;
+
+  --ink: #0f1c1a;
+  --ink-soft: #3d4f4b;
+  --muted: #566763;
+  --faint: #647570;
+
+  --primary: #0b6f65;
+  --primary-hover: #0a5951;
+  --on-primary: #ffffff;
+  --link: #0b6f65;
+  --accent: #e8a33d;
+
+  --brand-50: #edf9f7;
+  --brand-100: #d3f3ee;
+  --brand-200: #a8e6dd;
+
+  --success-soft: #e7f6ee;
+  --success-ink: #14532d;
+  --success-line: #b5e2c6;
+  --warning-soft: #fdf2d9;
+  --warning-ink: #6f4204;
+  --warning-line: #f1d894;
+  --danger: #b42318;
+  --danger-soft: #fdebe9;
+  --danger-ink: #8a1c13;
+  --danger-line: #f4c1bb;
+  --info-soft: #e5f1fb;
+  --info-ink: #0b4670;
+  --info-line: #b8d9f1;
+  --grape-soft: #f0eafc;
+  --grape-ink: #55209f;
+  --grape-line: #d8c8f6;
+
+  --chart-1: #0b6f65;
+  --chart-2: #e8a33d;
+  --chart-3: #3b82c4;
+  --chart-4: #8b5cd6;
+  --chart-5: #d9576b;
+  --chart-6: #6aa84f;
+
+  --sh-card: 0 1px 2px rgb(15 28 26 / 0.05), 0 12px 28px -18px rgb(15 28 26 / 0.18);
+  --sh-pop: 0 2px 4px rgb(15 28 26 / 0.06), 0 18px 40px -16px rgb(15 28 26 / 0.28);
+  --bg-glow-1: rgb(20 163 146 / 0.10);
+  --bg-glow-2: rgb(232 163 61 / 0.08);
+}
+
+.dark {
+  --surface: #081311;
+  --surface-2: #132320;
+  --card: #0e1b18;
+  --line: #1e312d;
+  --line-strong: #30484a;
+
+  --ink: #e8f2ef;
+  --ink-soft: #bccbc7;
+  --muted: #92a7a2;
+  --faint: #7d928d;
+
+  --primary: #2fbfad;
+  --primary-hover: #52d4c3;
+  --on-primary: #03211d;
+  --link: #5fd8c8;
+  --accent: #f0b254;
+
+  --brand-50: #11302b;
+  --brand-100: #16403a;
+  --brand-200: #1f5a51;
+
+  --success-soft: #0f2a1c;
+  --success-ink: #8be3ab;
+  --success-line: #1f4d33;
+  --warning-soft: #2e2410;
+  --warning-ink: #f5cf7c;
+  --warning-line: #5a4414;
+  --danger: #ff8d80;
+  --danger-soft: #331515;
+  --danger-ink: #ffb9b0;
+  --danger-line: #6a2623;
+  --info-soft: #0e2335;
+  --info-ink: #93cdf5;
+  --info-line: #1d4666;
+  --grape-soft: #221a39;
+  --grape-ink: #cdb8fb;
+  --grape-line: #41316b;
+
+  --chart-1: #2fbfad;
+  --chart-2: #f0b254;
+  --chart-3: #6cb0ee;
+  --chart-4: #b392f0;
+  --chart-5: #f08a9b;
+  --chart-6: #94d070;
+
+  --sh-card: 0 1px 0 rgb(255 255 255 / 0.03) inset, 0 14px 30px -20px rgb(0 0 0 / 0.7);
+  --sh-pop: 0 20px 44px -18px rgb(0 0 0 / 0.75);
+  --bg-glow-1: rgb(47 191 173 / 0.10);
+  --bg-glow-2: rgb(240 178 84 / 0.05);
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --font-sans: "Plus Jakarta Sans Variable", ui-sans-serif, system-ui, sans-serif;
+
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-card: var(--card);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-on-primary: var(--on-primary);
+  --color-link: var(--link);
+  --color-accent: var(--accent);
+
+  --color-brand-50: var(--brand-50);
+  --color-brand-100: var(--brand-100);
+  --color-brand-200: var(--brand-200);
+  --color-brand-500: #14a392;
+  --color-brand-600: #0f8a7d;
+  --color-brand-700: #0b6f65;
+  --color-brand-800: #0a5951;
+  --color-brand-900: #0b3f3a;
+  --color-sidebar: #0a1f1c;
+
+  --color-success-soft: var(--success-soft);
+  --color-success-ink: var(--success-ink);
+  --color-success-line: var(--success-line);
+  --color-warning-soft: var(--warning-soft);
+  --color-warning-ink: var(--warning-ink);
+  --color-warning-line: var(--warning-line);
+  --color-danger: var(--danger);
+  --color-danger-solid: #b42318;
+  --color-danger-soft: var(--danger-soft);
+  --color-danger-ink: var(--danger-ink);
+  --color-danger-line: var(--danger-line);
+  --color-info-soft: var(--info-soft);
+  --color-info-ink: var(--info-ink);
+  --color-info-line: var(--info-line);
+  --color-grape-soft: var(--grape-soft);
+  --color-grape-ink: var(--grape-ink);
+  --color-grape-line: var(--grape-line);
+
+  --shadow-card: var(--sh-card);
+  --shadow-pop: var(--sh-pop);
+
+  --animate-fade-up: fade-up 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  --animate-pop-in: pop-in 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+  --animate-shimmer: shimmer 1.6s ease-in-out infinite;
+  --animate-float: float 6s ease-in-out infinite;
+}
+
+/* ---------------------------------------------------------------------------
+   Keyframe animations (CO-2)
+   --------------------------------------------------------------------------- */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes shimmer {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes draw {
+  from {
+    stroke-dashoffset: var(--len);
+  }
+  to {
+    stroke-dashoffset: var(--off);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Base
+   --------------------------------------------------------------------------- */
+html {
+  color-scheme: light;
+  scroll-behavior: smooth;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--surface);
+  background-image:
+    radial-gradient(60rem 36rem at 105% -10%, var(--bg-glow-1), transparent 60%),
+    radial-gradient(48rem 30rem at -10% 110%, var(--bg-glow-2), transparent 60%);
+  background-attachment: fixed;
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv11";
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Visible keyboard focus everywhere (WCAG 2.4.7) */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+::selection {
+  background: var(--brand-200);
+  color: var(--ink);
+}
+
+/* Slim, theme-aware scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+}
+
+/* Staggered entrance: children fade up one after another */
+.stagger > * {
+  animation: fade-up 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.stagger > *:nth-child(1) { animation-delay: 0ms; }
+.stagger > *:nth-child(2) { animation-delay: 70ms; }
+.stagger > *:nth-child(3) { animation-delay: 140ms; }
+.stagger > *:nth-child(4) { animation-delay: 210ms; }
+.stagger > *:nth-child(5) { animation-delay: 280ms; }
+.stagger > *:nth-child(6) { animation-delay: 350ms; }
+
+/* Animated donut / ring strokes */
+.ring-draw {
+  --len: 0;
+  animation: draw 1s cubic-bezier(0.3, 0.7, 0.2, 1) both;
+}
+
+/* Brand gradient surfaces */
+.bg-hero {
+  background:
+    radial-gradient(28rem 16rem at 90% 0%, rgb(255 255 255 / 0.16), transparent 60%),
+    radial-gradient(22rem 14rem at 0% 100%, rgb(232 163 61 / 0.22), transparent 60%),
+    linear-gradient(135deg, #0b6f65 0%, #0a4f49 55%, #0a2f2b 100%);
+}
+
+.bg-grid {
+  background-image:
+    linear-gradient(rgb(255 255 255 / 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 0.05) 1px, transparent 1px);
+  background-size: 36px 36px;
+  mask-image: radial-gradient(circle at 50% 40%, #000 30%, transparent 75%);
+}
+
+/* Respect users who ask for less motion (WCAG 2.3.3) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Payslip printing: always print light, hide chrome, keep the document (CO-2 media types) */
+@media print {
+  :root,
+  .dark {
+    --surface: #fff;
+    --card: #fff;
+    --line: #d9e1de;
+    --ink: #0f1c1a;
+    --ink-soft: #3d4f4b;
+    --muted: #566763;
+  }
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #fff !important;
+  }
+  .print-area {
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Cursor-follow light (see hooks/useSpotlight.js)
+   --------------------------------------------------------------------------- */
+:root {
+  --aura: rgb(20 163 146 / 0.13);
+  --spot: rgb(20 163 146 / 0.13);
+  --spot-border: rgb(15 138 125 / 0.65);
+}
+
+.dark {
+  --aura: rgb(47 191 173 / 0.16);
+  --spot: rgb(95 216 200 / 0.13);
+  --spot-border: rgb(120 230 214 / 0.9);
+}
+
+.cursor-aura {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  background: radial-gradient(
+    480px circle at var(--gx, 50%) var(--gy, -40%),
+    var(--aura),
+    transparent 65%
+  );
+  opacity: var(--aura-on, 0);
+  transition: opacity 0.5s ease;
+}
+
+@layer components {
+  /* Inner glow (on hover) + glowing 1.5px border (whenever the cursor is near). */
+  .spotlight {
+    position: relative;
+  }
+  .spotlight::before,
+  .spotlight::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+  }
+  .spotlight::before {
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    background: radial-gradient(
+      340px circle at var(--mx, -999px) var(--my, -999px),
+      var(--spot),
+      transparent 70%
+    );
+  }
+  .spotlight:hover::before {
+    opacity: 1;
+  }
+  .spotlight::after {
+    padding: 1.5px;
+    background: radial-gradient(
+      260px circle at var(--mx, -999px) var(--my, -999px),
+      var(--spot-border),
+      transparent 70%
+    );
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+
+  /* For elements that sit on dark / saturated backgrounds (sidebar, hero, primary buttons) */
+  .spotlight-light {
+    --spot: rgb(255 255 255 / 0.16);
+    --spot-border: rgb(255 255 255 / 0.75);
+  }
+}
+
+@media print {
+  .cursor-aura,
+  .spotlight::before,
+  .spotlight::after {
+    display: none !important;
+  }
+}
